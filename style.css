@@ -24,16 +24,17 @@ body {
     font-style: italic;
 }
 
+/* Bouquet container — wider to hold 10 flowers */
 .bouquet-container {
     position: relative;
-    width: 300px;
-    height: 450px;
+    width: 420px;
+    height: 480px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
 }
 
-/* Estructura de la Flor con Animación */
+/* ── Shared flower base ── */
 .flower {
     position: absolute;
     bottom: 0;
@@ -41,15 +42,16 @@ body {
     flex-direction: column;
     align-items: center;
     transform-origin: bottom center;
-    /* Movimiento lento y fluido */
     animation: sway 4s ease-in-out infinite;
 }
 
-/* Desfase de animación para que no se muevan todas al mismo tiempo */
 .flower:nth-child(even) {
     animation-delay: 1s;
 }
 
+/* ════════════════════════════════
+   YELLOW SUNFLOWERS  (original)
+   ════════════════════════════════ */
 .petals-container {
     position: relative;
     width: 120px;
@@ -69,29 +71,12 @@ body {
     transform-origin: bottom center;
 }
 
-.petal:nth-child(1) {
-    transform: rotate(0deg);
-}
-
-.petal:nth-child(2) {
-    transform: rotate(60deg);
-}
-
-.petal:nth-child(3) {
-    transform: rotate(120deg);
-}
-
-.petal:nth-child(4) {
-    transform: rotate(180deg);
-}
-
-.petal:nth-child(5) {
-    transform: rotate(240deg);
-}
-
-.petal:nth-child(6) {
-    transform: rotate(300deg);
-}
+.petal:nth-child(1) { transform: rotate(0deg); }
+.petal:nth-child(2) { transform: rotate(60deg); }
+.petal:nth-child(3) { transform: rotate(120deg); }
+.petal:nth-child(4) { transform: rotate(180deg); }
+.petal:nth-child(5) { transform: rotate(240deg); }
+.petal:nth-child(6) { transform: rotate(300deg); }
 
 .center {
     position: absolute;
@@ -113,20 +98,89 @@ body {
     z-index: 1;
 }
 
-/* Keyframes para el movimiento lento */
-@keyframes sway {
+/* ════════════════════════════════
+   PURPLE CARNATIONS  (new)
+   ════════════════════════════════ */
 
+/* Carnation head — slightly smaller globe */
+.carnation-head {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    z-index: 3;
+}
+
+/* Base carnation petal — ruffled, shorter, rounder than sunflower */
+.carnation-petal {
+    position: absolute;
+    width: 36px;
+    height: 42px;
+    /* Soft purple palette */
+    background: #c084d4;
+    border: 1.2px solid #7b3fa0;
+    /* Frilly top edge via aggressive border-radius */
+    border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+    left: 27px;
+    top: 4px;
+    transform-origin: bottom center;
+    /* Slight wave effect */
+    filter: drop-shadow(0 1px 1px rgba(90, 20, 120, 0.25));
+}
+
+/* Outer ring — 6 petals every 60°, longer reach */
+.carnation-petal.cp-0  { transform: rotate(0deg)   scaleY(1.15); background: #b57ccc; }
+.carnation-petal.cp-1  { transform: rotate(60deg)  scaleY(1.10); background: #c084d4; }
+.carnation-petal.cp-2  { transform: rotate(120deg) scaleY(1.15); background: #b57ccc; }
+.carnation-petal.cp-3  { transform: rotate(180deg) scaleY(1.10); background: #c88ee0; }
+.carnation-petal.cp-4  { transform: rotate(240deg) scaleY(1.15); background: #b57ccc; }
+.carnation-petal.cp-5  { transform: rotate(300deg) scaleY(1.10); background: #c084d4; }
+
+/* Inner ring — 6 petals offset 30°, shorter & lighter */
+.carnation-petal.cp-6  { transform: rotate(30deg)  scaleY(0.80); background: #d9a8e8; width: 30px; height: 34px; left: 30px; top: 12px; }
+.carnation-petal.cp-7  { transform: rotate(90deg)  scaleY(0.80); background: #e0b5f0; width: 30px; height: 34px; left: 30px; top: 12px; }
+.carnation-petal.cp-8  { transform: rotate(150deg) scaleY(0.80); background: #d9a8e8; width: 30px; height: 34px; left: 30px; top: 12px; }
+.carnation-petal.cp-9  { transform: rotate(210deg) scaleY(0.80); background: #e0b5f0; width: 30px; height: 34px; left: 30px; top: 12px; }
+.carnation-petal.cp-10 { transform: rotate(270deg) scaleY(0.80); background: #d9a8e8; width: 30px; height: 34px; left: 30px; top: 12px; }
+.carnation-petal.cp-11 { transform: rotate(330deg) scaleY(0.80); background: #e0b5f0; width: 30px; height: 34px; left: 30px; top: 12px; }
+
+/* Tiny dark-purple center knot */
+.carnation-center {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle, #7b2fa0, #4a0066);
+    border-radius: 50%;
+    top: 37px;
+    left: 37px;
+    z-index: 10;
+    border: 1px solid #3a005a;
+}
+
+/* Carnation stem — same green, slightly thinner */
+.carnation-stem {
+    width: 5px;
+    height: 220px;
+    background: #2e7d32;
+    position: relative;
+    z-index: 1;
+}
+
+/* ════════════════════════════════
+   SHARED SWAY ANIMATION
+   ════════════════════════════════ */
+@keyframes sway {
     0%,
     100% {
         transform: translateX(var(--offset)) rotate(var(--angle));
     }
-
     50% {
         transform: translateX(var(--offset)) rotate(calc(var(--angle) + 3deg));
     }
 }
 
-/* Ventana de la carta */
+/* ════════════════════════════════
+   LETTER MODAL
+   ════════════════════════════════ */
 .letter-overlay {
     display: none;
     position: fixed;
