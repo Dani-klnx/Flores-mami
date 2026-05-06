@@ -1,0 +1,190 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Georgia', serif;
+}
+
+.main-container {
+    text-align: center;
+    width: 100%;
+}
+
+/* Diseño del Título Superior */
+.main-title {
+    color: #d4008d;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font-style: italic;
+}
+
+.bouquet-container {
+    position: relative;
+    width: 300px;
+    height: 450px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estructura de la Flor con Animación */
+.flower {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: bottom center;
+    /* Movimiento lento y fluido */
+    animation: sway 4s ease-in-out infinite;
+}
+
+/* Desfase de animación para que no se muevan todas al mismo tiempo */
+.flower:nth-child(even) {
+    animation-delay: 1s;
+}
+
+.petals-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    z-index: 2;
+}
+
+.petal {
+    position: absolute;
+    width: 50px;
+    height: 70px;
+    background: #FFD700;
+    border: 1.5px solid #000;
+    border-radius: 50% 50% 40% 40%;
+    left: 35px;
+    top: 0;
+    transform-origin: bottom center;
+}
+
+.petal:nth-child(1) {
+    transform: rotate(0deg);
+}
+
+.petal:nth-child(2) {
+    transform: rotate(60deg);
+}
+
+.petal:nth-child(3) {
+    transform: rotate(120deg);
+}
+
+.petal:nth-child(4) {
+    transform: rotate(180deg);
+}
+
+.petal:nth-child(5) {
+    transform: rotate(240deg);
+}
+
+.petal:nth-child(6) {
+    transform: rotate(300deg);
+}
+
+.center {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #5d3a1a;
+    border-radius: 50%;
+    top: 45px;
+    left: 45px;
+    z-index: 10;
+    border: 1.5px solid #000;
+}
+
+.stem {
+    width: 6px;
+    height: 250px;
+    background: #2e7d32;
+    position: relative;
+    z-index: 1;
+}
+
+/* Keyframes para el movimiento lento */
+@keyframes sway {
+
+    0%,
+    100% {
+        transform: translateX(var(--offset)) rotate(var(--angle));
+    }
+
+    50% {
+        transform: translateX(var(--offset)) rotate(calc(var(--angle) + 3deg));
+    }
+}
+
+/* Ventana de la carta */
+.letter-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.letter-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fffdf0;
+    padding: 40px;
+    width: 320px;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid #e0d9b5;
+}
+
+.letter-body h2 {
+    color: #ce05ad;
+    text-align: center;
+}
+
+.letter-body p {
+    line-height: 1.6;
+    color: #444;
+}
+
+.signature {
+    margin-top: 20px;
+    font-style: italic;
+    text-align: right;
+}
+
+.close-icon {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.open-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 30px;
+    background: #FFD700;
+    border: 1px solid #000;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 50;
+}
